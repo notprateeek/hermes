@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { AnalysisDashboard } from "../../components/AnalysisDashboard";
 import { AskHermes, type ChatTurn } from "../../components/AskHermes";
@@ -17,7 +17,16 @@ async function readJson<T>(response: Response): Promise<T> {
   return data;
 }
 
-export default function Dashboard() {
+// useSearchParams() requires a Suspense boundary for prerendering
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={null}>
+      <Dashboard />
+    </Suspense>
+  );
+}
+
+function Dashboard() {
   const searchParams = useSearchParams();
   const [text, setText] = useState("");
   const [file, setFile] = useState<File | null>(null);
