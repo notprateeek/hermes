@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Theme: Dark (default) ─────────────────────────────── */
+:root {
+  --bg:              12 13 16;      /* #0C0D10 near-black  */
+  --surface:         20 21 24;      /* #141518              */
+  --surface-raised:  30 32 40;      /* #1E2028              */
+  --border:          42 46 58;      /* #2A2E3A              */
+  --clause:          255 79 31;     /* #FF4F1F  red-pen     */
+  --text-primary:    240 237 230;   /* #F0EDE6              */
+  --text-muted:      110 113 128;   /* #6E7180              */
+
+  /* legacy names — remapped so existing components auto-theme */
+  --panel:           20 21 24;
+  --ink:             240 237 230;
+  --muted-legacy:    110 113 128;
+  --line:            42 46 58;
+  --teal:            62 207 142;
+  --amber-legacy:    245 158 11;
+  --danger:          239 68 68;
+  --gold:            245 158 11;
+  --cobalt:          255 79 31;   /* remapped to clause red */
+}
+
+/* ─── Theme: Light ───────────────────────────────────────── */
+[data-theme="light"] {
+  --bg:              245 242 236;   /* #F5F2EC vellum       */
+  --surface:         255 255 255;
+  --surface-raised:  237 233 225;   /* #EDE9E1              */
+  --border:          210 207 200;   /* #D2CFC8              */
+  --clause:          220 62 18;     /* #DC3E12 darker red   */
+  --text-primary:    26 27 31;      /* #1A1B1F              */
+  --text-muted:      110 105 97;    /* #6E6961              */
+
+  --panel:           245 242 236;
+  --ink:             26 27 31;
+  --muted-legacy:    110 105 97;
+  --line:            210 207 200;
+  --teal:            22 163 74;
+  --amber-legacy:    180 120 0;
+  --danger:          180 35 24;
+  --gold:            180 120 0;
+  --cobalt:          220 62 18;
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+html { color-scheme: dark; }
+[data-theme="light"] { color-scheme: light; }
+
+body {
+  margin: 0;
+  background: rgb(var(--bg));
+  color: rgb(var(--text-primary));
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--border));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgb(var(--text-muted)); }
+
+/* ─── Document scanner animations ───────────────────────── */
+@keyframes scanBarMove {
+  0%   { left: -4px; opacity: 0; }
+  4%   { opacity: 1; }
+  88%  { opacity: 1; }
+  96%  { opacity: 0; left: calc(100% + 4px); }
+  100% { opacity: 0; left: calc(100% + 4px); }
+}
+
+@keyframes clauseHL {
+  0%, 12%  { background-color: transparent; color: rgb(90 93 106); }
+  32%, 84% { background-color: rgba(255, 79, 31, 0.13); color: rgb(240 237 230); border-radius: 2px; }
+  96%, 100%{ background-color: transparent; color: rgb(90 93 106); }
+}
+
+@keyframes findingReveal {
+  0%, 50%  { opacity: 0; transform: translateY(8px); }
+  68%, 84% { opacity: 1; transform: translateY(0); }
+  96%, 100%{ opacity: 0; transform: translateY(0); }
+}
+
+.scan-bar-el {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 3px;
+  background: rgb(255, 79, 31);
+  box-shadow: 0 0 14px rgba(255, 79, 31, 0.9), 0 0 48px rgba(255, 79, 31, 0.3);
+  animation: scanBarMove 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.clause-hl {
+  animation: clauseHL 6s ease-in-out infinite;
+}
+
+.finding-reveal {
+  animation: findingReveal 6s ease-out infinite;
+}
+
+/* ─── Dot-grid texture for dark panel ───────────────────── */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
