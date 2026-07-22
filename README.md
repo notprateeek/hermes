@@ -2,6 +2,8 @@
 
 AI legal agreement analyzer. Upload a PDF, DOCX, or paste contract text → get a structured analysis with signing verdict, risk flags, negotiation ammo, deadlines, and grounded Q&A.
 
+**Live:** https://hermes-notprateeek.netlify.app
+
 ---
 
 ## What it does
