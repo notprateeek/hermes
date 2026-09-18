@@ -274,3 +274,8 @@ Draft → Analyze (live) → Preflight (live) → Sign (live) → Escrow (soon) 
 - Don't add a test framework
 - Don't commit `.env.local`
 - Don't add comments that describe what the code does — only add them for non-obvious WHY (hidden constraints, workarounds, invariants)
+
+## License
+
+[MIT](./LICENSE) — source code only. Third-party assets bundled under
+`public/` retain their own licenses.
